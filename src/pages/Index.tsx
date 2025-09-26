@@ -49,10 +49,17 @@ const LandingPage = () => {
         transition={{ duration: 1, ease: "easeInOut" }}
       >
         <Gift className="h-16 w-16 text-pink-400 animate-pulse-gentle" />
-        <h1 className="text-4xl font-script text-center text-white">
+        <h1
+          className="text-4xl text-center text-white"
+          style={{ fontFamily: "'Pacifico', cursive" }}
+        >
           Hey Zareen 🎉
         </h1>
-        <p className="text-center text-gray-300/80 font-sans animate-pulse-glow">
+
+        <p
+          className="text-center text-gray-300/80 animate-pulse-glow"
+          style={{ fontFamily: "'Pacifico', cursive" }}
+        >
           This one's for you - click to find out why.
         </p>
 

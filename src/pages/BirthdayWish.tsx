@@ -13,11 +13,15 @@ const BirthdayWish = () => {
   const [selectedMessage, setSelectedMessage] = useState(0);
 
   const friendlyMessages = [
-    `Hey Zareen! Happy 20th birthday! I hope your day is filled with laughter, joy, and all the little things that make you happiest. May you be surrounded by love, smiles, and unforgettable moments today. Wishing you an amazing year full of adventures and wonderful surprises! 🥳🎂🎉`,
+    `I wish your birthday sparkles with fun, laughter, and all the little joys that make life magical. May every moment today turn into a cherished memory! 🥳✨🎂`,
 
-    `Happy birthday, Zareen! I hope your day is overflowing with smiles, fun, and tiny moments that make it truly special. May this year bring you endless happiness, new opportunities, and experiences that make your heart glow. Celebrate yourself and all the amazing things ahead! 🥳🎂🎉`,
+    `I wish this year brings you exciting adventures, beautiful surprises, and endless smiles. Keep being the amazing person you are and let your light shine everywhere! 🌟🎉💖`,
 
-    `Zareen, happy 20th birthday! I hope your day is bright, joyful, and overflowing with love and laughter. Wishing you a year full of success, beautiful memories, exciting adventures, and moments that make life even more wonderful. Keep shining and being your incredible self! 🥳🎂🎉`,
+    `I wish your heart overflows with happiness today and always. May your dreams grow bigger, your laughter louder, and your days brighter than ever! 🎂🎈🌸`,
+
+    `I wish today is as incredible as you are! Celebrate every moment, embrace the surprises, and enjoy a year full of love, fun, and unforgettable memories! 🎉💫🎁`,
+
+    `I wish your journey ahead is filled with happiness, courage, and little moments that make life truly wonderful. Happy birthday and keep shining! 🥳🌷🎂`,
   ];
 
   useEffect(() => {
@@ -78,12 +82,16 @@ const BirthdayWish = () => {
                 </div>
 
                 <div className="mt-8 mb-4 text-center">
-                  <h1 className="text-3xl font-bold text-pink-500">
-                    Happy 20th Birthday, Zareen
+                  <h1
+                    style={{
+                      fontFamily: "'Pacifico', cursive",
+                      fontSize: "2.5rem",
+                      color: "#f1eaeaff",
+                      textAlign: "center",
+                    }}
+                  >
+                    Happy Birthday, Zareen
                   </h1>
-                  <div className="mt-1 text-gray-300/70 text-sm">
-                    Sending you all the love and smiles on your special day!
-                  </div>
                 </div>
 
                 <div className="my-8 px-4 md:px-8 text-white leading-relaxed md:leading-loose min-h-[150px]">
@@ -94,6 +102,13 @@ const BirthdayWish = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.5 }}
+                      style={{
+                        fontFamily: "'Pacifico', cursive",
+                        fontSize: "1.2rem",
+                        color: "#f1eaeaff",
+                        lineHeight: 1.6,
+                        textAlign: "center",
+                      }}
                     >
                       {friendlyMessages[selectedMessage]}
                     </motion.p>
