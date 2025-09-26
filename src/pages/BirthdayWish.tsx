@@ -5,67 +5,8 @@ import { Gift } from "lucide-react";
 import confetti from "canvas-confetti";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Big glowing circles
-const CircleGlow = ({
-  delay,
-  size,
-  x,
-  y,
-  color,
-}: {
-  delay: number;
-  size: string;
-  x: string;
-  y: string;
-  color: string;
-}) => {
-  return (
-    <motion.div
-      className="absolute rounded-full blur-3xl"
-      style={{
-        width: size,
-        height: size,
-        left: x,
-        top: y,
-        backgroundColor: color,
-        opacity: 0.35,
-      }}
-      animate={{
-        opacity: [0, 0.8, 0],
-        scale: [0.8, 1.2, 0.8],
-      }}
-      transition={{
-        duration: 4 + Math.random() * 2,
-        repeat: Infinity,
-        delay,
-      }}
-    />
-  );
-};
-
-// Tiny sparkles
-const Sparkle = ({ x, y, delay }: { x: number; y: number; delay: number }) => {
-  return (
-    <motion.div
-      className="absolute rounded-full bg-yellow-300 blur-sm"
-      style={{
-        width: `${Math.random() * 6 + 2}px`,
-        height: `${Math.random() * 6 + 2}px`,
-        top: `${y}%`,
-        left: `${x}%`,
-      }}
-      animate={{
-        opacity: [0, 1, 0],
-        scale: [0.8, 1.2, 0.8],
-      }}
-      transition={{
-        duration: 2 + Math.random() * 2,
-        repeat: Infinity,
-        delay,
-      }}
-    />
-  );
-};
+const isMobile =
+  typeof window !== "undefined" ? window.innerWidth < 768 : false;
 
 const BirthdayWish = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -86,25 +27,26 @@ const BirthdayWish = () => {
 
   const triggerConfetti = () => {
     const duration = 1000;
+    const particleCount = isMobile ? 8 : 12;
     const animationEnd = Date.now() + duration;
-    const defaults = {
-      startVelocity: 30,
-      spread: 360,
-      ticks: 60,
-      zIndex: 9999,
-      colors: ["#ff69b4", "#ffffff", "#ffd1dc"],
-    };
 
-    const interval = setInterval(() => {
-      const timeLeft = animationEnd - Date.now();
-      if (timeLeft <= 0) return clearInterval(interval);
+    const interval = setInterval(
+      () => {
+        const timeLeft = animationEnd - Date.now();
+        if (timeLeft <= 0) return clearInterval(interval);
 
-      confetti({
-        ...defaults,
-        particleCount: 12,
-        origin: { x: Math.random(), y: Math.random() * 0.5 },
-      });
-    }, 100);
+        confetti({
+          startVelocity: 30,
+          spread: 360,
+          ticks: 60,
+          zIndex: 9999,
+          colors: ["#ff69b4", "#ffffff", "#ffd1dc"],
+          particleCount,
+          origin: { x: Math.random(), y: Math.random() * 0.5 },
+        });
+      },
+      isMobile ? 200 : 100
+    );
   };
 
   const handleChangeMessage = () => {
@@ -112,43 +54,18 @@ const BirthdayWish = () => {
     triggerConfetti();
   };
 
-  const glows = Array.from({ length: 12 });
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden p-4">
-      {/* Circle Glow Background */}
-      {glows.map((_, i) => (
-        <CircleGlow
-          key={`circle-${i}`}
-          size={`${Math.random() * 250 + 120}px`}
-          x={`${Math.random() * 100}%`}
-          y={`${Math.random() * 100}%`}
-          delay={Math.random() * 5}
-          color={["#ff69b4", "#ffffff", "#ffd1dc"][i % 3]}
-        />
-      ))}
-
-      {/* Tiny sparkles */}
-      {[...Array(20)].map((_, i) => (
-        <Sparkle
-          key={`sparkle-${i}`}
-          x={Math.random() * 100}
-          y={Math.random() * 100}
-          delay={Math.random() * 2}
-        />
-      ))}
-
+    <div className="min-h-screen flex items-center justify-center relative z-10 p-4">
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 50 }}
+            initial={{ opacity: 0, scale: isMobile ? 0.9 : 0.8, y: 50 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 50 }}
+            exit={{ opacity: 0, scale: isMobile ? 0.9 : 0.8, y: 50 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <Card className="relative w-full max-w-2xl bg-black/30 backdrop-blur-md shadow-xl border-2 border-pink-500/40">
+            <Card className="relative w-full max-w-2xl bg-black/30 backdrop-blur-sm shadow-xl border-2 border-pink-500/40 rounded-3xl">
               <CardContent className="pt-6 pb-8">
-                {/* Icons & New button */}
                 <div className="absolute top-4 right-4 left-4 flex justify-between items-center">
                   <Gift className="h-5 w-5 text-pink-400 animate-pulse-gentle" />
                   <Button
@@ -160,7 +77,6 @@ const BirthdayWish = () => {
                   </Button>
                 </div>
 
-                {/* Heading */}
                 <div className="mt-8 mb-4 text-center">
                   <h1 className="text-3xl font-bold text-pink-500">
                     Happy 20th Birthday, Zareen
@@ -170,7 +86,6 @@ const BirthdayWish = () => {
                   </div>
                 </div>
 
-                {/* Birthday message */}
                 <div className="my-8 px-4 md:px-8 text-white leading-relaxed md:leading-loose min-h-[150px]">
                   <AnimatePresence mode="wait">
                     <motion.p
