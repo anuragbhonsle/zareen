@@ -5,6 +5,45 @@ import { Gift } from "lucide-react";
 import confetti from "canvas-confetti";
 import { motion } from "framer-motion";
 
+// Circle Glow background
+const CircleGlow = ({
+  delay,
+  size,
+  x,
+  y,
+  color,
+}: {
+  delay: number;
+  size: string;
+  x: string;
+  y: string;
+  color: string;
+}) => {
+  return (
+    <motion.div
+      className="absolute rounded-full blur-3xl"
+      style={{
+        width: size,
+        height: size,
+        left: x,
+        top: y,
+        backgroundColor: color,
+        opacity: 0.4,
+      }}
+      animate={{
+        opacity: [0, 0.8, 0],
+        scale: [0.8, 1.2, 0.8],
+      }}
+      transition={{
+        duration: 4 + Math.random() * 2,
+        repeat: Infinity,
+        delay,
+      }}
+    />
+  );
+};
+
+// Small Sparkle dots
 const Sparkle = ({ delay, size, x, y }) => {
   return (
     <motion.div
@@ -59,7 +98,7 @@ const Index = () => {
         particleCount: 15,
         origin: {
           x: Math.random(),
-          y: Math.random() * 0.5, // top half
+          y: Math.random() * 0.5,
         },
       });
     }, 100);
@@ -71,21 +110,34 @@ const Index = () => {
   };
 
   const sparkles = Array.from({ length: 30 });
+  const glows = Array.from({ length: 12 });
 
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black p-4">
-      {/* Sparkle background */}
+      {/* Circle Glow Background */}
+      {glows.map((_, i) => (
+        <CircleGlow
+          key={`circle-${i}`}
+          size={`${Math.random() * 250 + 120}px`}
+          x={`${Math.random() * 100}%`}
+          y={`${Math.random() * 100}%`}
+          delay={Math.random() * 5}
+          color={["#ff69b4", "#ffffff", "#ffd1dc"][i % 3]}
+        />
+      ))}
+
+      {/* Sparkle dots */}
       {sparkles.map((_, i) => (
         <Sparkle
-          key={i}
-          size={`${Math.random() * 6 + 2}px`} // 2–8px
+          key={`sparkle-${i}`}
+          size={`${Math.random() * 6 + 2}px`}
           x={`${Math.random() * 100}%`}
           y={`${Math.random() * 100}%`}
           delay={Math.random() * 5}
         />
       ))}
 
-      {/* Semi-transparent overlay for readability */}
+      {/* Semi-transparent overlay */}
       <div className="absolute inset-0 bg-black/60" />
 
       {/* Card */}
@@ -94,12 +146,12 @@ const Index = () => {
           isAnimating ? "scale-0 rotate-180 opacity-0" : "scale-100 opacity-100"
         }`}
       >
-        <div className="flex flex-col items-center gap-8 p-12 bg-black/70 rounded-xl shadow-lg border border-pink-500/20">
+        <div className="flex flex-col items-center gap-8 p-12 bg-black/30 backdrop-blur-md rounded-xl shadow-lg border border-pink-500/30">
           <Gift className="h-16 w-16 text-pink-400 animate-pulse-gentle" />
-          <h1 className="text-3xl font-bold text-center text-white">
-            A Special Surprise
+          <h1 className="text-4xl font-script text-center text-white">
+            Hey Zareen 🎉
           </h1>
-          <p className="text-center text-gray-300/80 animate-pulse-glow">
+          <p className="text-center text-gray-300/80 font-sans animate-pulse-glow">
             This one's for you - click to find out why.
           </p>
 
@@ -108,9 +160,9 @@ const Index = () => {
             disabled={isAnimating}
             className={`${
               isAnimating ? "opacity-60 cursor-not-allowed" : ""
-            } bg-pink-500 hover:bg-pink-600 text-white px-8 py-6 text-lg`}
+            } bg-pink-500 hover:bg-pink-600 text-white px-8 py-6 text-lg rounded-3xl`}
           >
-            Open Your Card
+            Open Your Birthday Wish
           </Button>
         </div>
       </div>
