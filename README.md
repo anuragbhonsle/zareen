@@ -1,6 +1,26 @@
-This project is built with:
+# 🎉 Birthday Wish Website  
 
-- Vite
-- TypeScript
-- React
-- Tailwind CSS
+A small, fun project I built to send a personalized **birthday surprise** 🎂.  
+
+It features:  
+- 🎨 A colorful animated background  
+- 🎊 Confetti effects on interaction  
+- 💌 Heartfelt birthday messages  
+- 🌐 Deployed with [Vercel](https://vercel.com/)  
+
+## Tech Stack  
+- **React + Next.js**  
+- **TypeScript**  
+- **Tailwind CSS**  
+- **Vercel** for hosting  
+
+## Project Setup  
+```bash
+# Clone the repo
+git clone https://github.com/your-username/birthday-wish.git
+
+# Install dependencies
+npm install  
+
+# Run locally
+npm run dev  
