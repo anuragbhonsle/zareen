@@ -9,7 +9,7 @@ It features:
 - 🌐 Deployed with [Vercel](https://vercel.com/)  
 
 ## Tech Stack  
-- **React + Next.js**  
+- **React**  
 - **TypeScript**  
 - **Tailwind CSS**  
 - **Vercel** for hosting  
