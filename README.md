@@ -5,7 +5,6 @@ A small, fun project I built to send a personalized **birthday surprise** 🎂.
 It features:  
 - 🎨 A colorful animated background  
 - 🎊 Confetti effects on interaction  
-- 💌 Heartfelt birthday messages  
 - 🌐 Deployed with [Vercel](https://vercel.com/)  
 
 ## Tech Stack  
